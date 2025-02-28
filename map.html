@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map - AccessMap</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .map-container {
+            height: 500px;
+            width: 100%;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .route-controls {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+        }
+        
+        .route-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .route-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .route-info {
+            display: none;
+            justify-content: space-between;
+            background-color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-top: 1rem;
+        }
+        
+        .route-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .route-detail svg {
+            color: var(--primary-color);
+        }
+        
+        .directions-panel {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 500px;
+            overflow-y: auto;
+        }
+        
+        .accessibility-features {
+            margin-top: 2rem;
+        }
+        
+        .accessibility-features h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .filter-option:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .filter-option.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .md\:col-span-2 {
+                width: 100%;
+            }
+            
+            .directions-panel {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a10 10 0 1 0 10 10H12V2Z"></path>
+                    <path d="M12 12 2 12"></path>
+                    <path d="M12 12 9 7"></path>
+                </svg>
+                <span>AccessMap</span>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html" class="active">Map</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="map-section">
+            <div class="container">
+                <h1>Find Accessible Routes</h1>
+                <p class="subtitle">Plan your journey with wheelchair-friendly navigation</p>
+                
+                <div class="route-controls">
+                    <div class="input-group">
+                        <label for="origin-input">Starting Point</label>
+                        <input type="text" id="origin-input" placeholder="Enter starting location">
+                    </div>
+                    <div class="input-group">
+                        <label for="destination-input">Destination</label>
+                        <input type="text" id="destination-input" placeholder="Enter destination">
+                    </div>
+                    
+                    <div class="filter-options">
+                        <div class="filter-option active" data-filter="wheelchair">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="7" r="4"></circle>
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <line x1="9" y1="17" x2="15" y2="17"></line>
+                            </svg>
+                            <span>Wheelchair Accessible</span>
+                        </div>
+                        <div class="filter-option" data-filter="elevator">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                <line x1="8" y1="8" x2="16" y2="8"></line>
+                                <line x1="8" y1="16" x2="16" y2="16"></line>
+                            </svg>
+                            <span>Elevators</span>
+                        </div>
+                        <div class="filter-option" data-filter="ramps">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="4 17 10 11 4 5"></polyline>
+                                <line x1="12" y1="19" x2="20" y2="19"></line>
+                            </svg>
+                            <span>Ramps</span>
+                        </div>
+                    </div>
+                    
+                    <button id="route-button" class="route-button">Find Accessible Route</button>
+                    
+                    <div id="route-info" class="route-info">
+                        <!-- Route information will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="grid">
+                    <div class="md:col-span-2">
+                        <div id="map-container" class="map-container"></div>
+                    </div>
+                    <div id="directions-panel" class="directions-panel">
+                        <!-- Directions will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="accessibility-features">
+                    <h2>Accessibility Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 8v4"></path>
+                                <path d="M12 16h.01"></path>
+                            </svg>
+                            <h3>Curb Ramp Information</h3>
+                            <p>Know where curb ramps are located for easier street crossing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <h3>Accessible Entrances</h3>
+                            <p>Find buildings with wheelchair-accessible entrances and facilities.</p>
+                        </div>
+                        <div class="feature-card">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                <line x1="4" y1="22" x2="4" y2="15"></line>
+                            </svg>
+                            <h3>Slope Information</h3>
+                            <p>Get details about sidewalk slopes to avoid steep inclines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AccessMap. Making navigation accessible for everyone.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

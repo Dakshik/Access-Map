@@ -1,14 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AccessMap - Wheelchair-Friendly Navigation</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvG2QwH1QJ9resTZsAgZN0oNBd1HpxwkI&libraries=places"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a10 10 0 1 0 10 10H12V2Z"></path>
+                    <path d="M12 12 2 12"></path>
+                    <path d="M12 12 9 7"></path>
+                </svg>
+                <span>AccessMap</span>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Navigate Your World Without Barriers</h1>
+                <p>AccessMap helps you find wheelchair-accessible routes and places, making navigation easier and more inclusive for everyone.</p>
+                <a href="map.html" class="cta-button">Find Accessible Routes</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Why Choose AccessMap?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <h3>Accessible Routes</h3>
+                        <p>Find wheelchair-friendly paths and routes optimized for accessibility.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <h3>Community Driven</h3>
+                        <p>Benefit from real experiences shared by our community members.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                        </svg>
+                        <h3>Real-time Updates</h3>
+                        <p>Get the latest information about accessibility changes in your area.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Join Our Mission</h2>
+                <p>Help us create a more accessible world by contributing to our community-driven platform.</p>
+                <a href="contact.html" class="cta-button">Get Involved</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AccessMap. Making navigation accessible for everyone.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
