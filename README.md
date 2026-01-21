@@ -1,7 +1,7 @@
 # Access Map
 
 # Video Walk-Through
-https://github.com/Dakshik/Access-Map/issues/1#issue-3836432674
+https://github.com/user-attachments/assets/6d586978-9295-43e1-99f7-8bae683b5933
 
 ## Inspiration
 Dakshi was inspired to create this platform after witnessing how challenging it was for her dad to get around in a wheelchair, struggling with the features on his phone, and relying entirely on the wheelchair. This motivated her to create AccessMap, a web app that helps wheelchair users find routes to travel freely and independently. 
